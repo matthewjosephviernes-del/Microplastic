@@ -336,7 +336,19 @@ with st.expander("📈 Step 6: Regression — Predict Risk Severity", expanded=F
             preds = regr.predict(X_test)
             r2 = r2_score(y_test, preds)
             mae = mean_absolute_error(y_test, preds)
-            rmse = mean_squared_error(y_test, preds, squared=False)
+
+            # Compute RMSE without using the 'squared' kwarg to ensure compatibility across sklearn versions
+            try:
+                # ensure arrays are numeric
+                y_test_arr = np.array(y_test).astype(float)
+                preds_arr = np.array(preds).astype(float)
+                mse = mean_squared_error(y_test_arr, preds_arr)
+                rmse = float(np.sqrt(mse))
+            except Exception:
+                # fallback: compute manual MSE then sqrt
+                dif = np.array(preds) - np.array(y_test)
+                mse = np.mean(dif ** 2)
+                rmse = float(np.sqrt(mse))
 
             st.success(f"✅ Regression complete — R²: {r2:.3f} {color_for_score(r2, True)}")
             st.write({"R²": round(float(r2), 3), "MAE": round(float(mae), 3), "RMSE": round(float(rmse), 3)})
