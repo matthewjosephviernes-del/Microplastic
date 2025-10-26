@@ -1,4 +1,3 @@
-pip requirements
 1| streamlit
 2| pandas
 3| numpy
@@ -6,4 +5,3 @@ pip requirements
 5| plotly
 6| seaborn
 7| matplotlib
-8| 
