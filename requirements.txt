@@ -1,7 +1,9 @@
-streamlit
-pandas
-numpy
-scikit-learn
-plotly
-seaborn
-matplotlib
+pip requirements
+1| streamlit
+2| pandas
+3| numpy
+4| scikit-learn
+5| plotly
+6| seaborn
+7| matplotlib
+8| 
